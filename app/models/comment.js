@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import ReactionableIdentifierAttributes from 'mestlife/mixins/reactionable-dientifier-attributes';
 
 const {
   Model,
@@ -6,12 +7,8 @@ const {
   belongsTo
 } = DS;
 
-export default Model.extend({
+export default Model.extend(ReactionableIdentifierAttributes, {
   reactionable: belongsTo('reactionable', { polymorphic: true }),
-  reactionableId: attr('string'),
-  reactionableType: attr('string'), // This property is used to determine
-                                    // the subclass of `reactioanble`. It's
-                                    // deleted before save, in the serializer.
 
   content: attr('string'),
   createdAt: attr('date', { defaultValue() { return new Date(); } }),
