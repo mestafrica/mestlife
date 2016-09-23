@@ -8,7 +8,5 @@ const {
 } = DS;
 
 export default Model.extend(ReactionableIdentifierAttributes, {
-  content: attr('string'),
-  createdAt: attr('date', { defaultValue() { return new Date(); } }),
-  updatedAt: attr('date', { defaultValue() { return new Date(); } }),
+  likedAt: attr('date', { defaultValue() { return new Date(); } }),
 });

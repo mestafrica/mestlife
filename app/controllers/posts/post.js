@@ -4,7 +4,11 @@ export default Ember.Controller.extend({
   commentContent: null,
 
   actions: {
-    createComment() {
+    clearCachedCommentContentValue() {
+      return this.set('commentContent', null);
+    },
+
+    createCommentOnTimelineItem() {
       let newComment = this.get('store').createRecord('comment', {
         content: this.get('commentContent'),
         reactionableType: 'timeline-items',
@@ -13,10 +17,17 @@ export default Ember.Controller.extend({
 
       this.get('model').get('comments').pushObject(newComment);
       newComment.save().
-        then(() => this.set('commentContent', null)).
-        catch(error => console.error('ERROR', error));
+        then(() => this.send('clearCachedCommentContentValue')).
+        catch(error => {
+          console.error('ERROR', error)
+          return this.get('store').unloadRecord(newComment);
+        });
 
       return false;
-    }
+    },
+
+    clearCommentContentIfReturnKeyIsPressed(event) {
+      return event.keyCode === 13 && (event.target.value = null, this.send('clearCachedCommentContentValue'));
+    },
   }
 });
