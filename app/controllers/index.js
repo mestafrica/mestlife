@@ -1,17 +1,40 @@
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
+const { Controller, get } = Ember;
+
+export default Controller.extend({
   likeText: 'Like',
   likeAction: 'likeTimelineItem',
+  timelineItemText: null,
+  timelineItemKind: 'text-timeline-item',
 
   actions: {
+    addTimelineItem() {
+      const kind = get(this, 'timelineItemKind');
+      const itemText = get(this, 'timelineItemText');
+
+      let newTimelineItem = get(this, 'store').createRecord(kind, {
+        kind,
+        itemText,
+      });
+
+      newTimelineItem.save().
+        then(() => false).
+        catch(error => {
+        // TODO: Put in the notification bar that their post
+        // failed to be persisted. Perhaps due to bad internet connection.
+        // get(this, 'store').unloadRecord(newTimelineItem);
+        console.error(error);
+      });
+    },
+
     likeTimelineItem(post) {
-      let like = this.get('store').createRecord('like', {
+      let like = get(this, 'store').createRecord('like', {
         reactionableType: 'timeline-items',
         reactionableId: post.id
       });
 
-      post.get('likes').pushObject(like);
+      get(post, 'likes').pushObject(like);
       like.save().
         then(() => {
           return this.setProperties({
@@ -21,7 +44,7 @@ export default Ember.Controller.extend({
         }).
         catch((error) => {
           console.error(error);
-          return this.get('store').unloadRecord(like);
+          return get(this, 'store').unloadRecord(like);
         });
     },
 

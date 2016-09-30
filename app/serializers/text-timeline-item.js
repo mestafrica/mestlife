@@ -12,5 +12,11 @@ export default DS.JSONAPISerializer.extend({
     resourceHash.type = 'timeline-item';
 
     return this._super(modelClass, resourceHash);
-  }
+  },
+
+  serialize() {
+    const json = this._super(...arguments);
+    delete json.data.attributes.kind;
+    return json;
+  },
 });
