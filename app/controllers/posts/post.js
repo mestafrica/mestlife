@@ -4,10 +4,6 @@ export default Ember.Controller.extend({
   commentContent: null,
 
   actions: {
-    clearCachedCommentContentValue() {
-      return this.set('commentContent', null);
-    },
-
     createCommentOnTimelineItem() {
       let newComment = this.get('store').createRecord('comment', {
         content: this.get('commentContent'),
@@ -17,17 +13,13 @@ export default Ember.Controller.extend({
 
       this.get('model').get('comments').pushObject(newComment);
       newComment.save().
-        then(() => this.send('clearCachedCommentContentValue')).
+        then(() => document.querySelector('.comment-textbox').value = null).
         catch(error => {
           console.error('ERROR', error)
           return this.get('store').unloadRecord(newComment);
         });
 
       return false;
-    },
-
-    clearCommentContentIfReturnKeyIsPressed(event) {
-      return event.keyCode === 13 && (event.target.value = null, this.send('clearCachedCommentContentValue'));
     },
   }
 });

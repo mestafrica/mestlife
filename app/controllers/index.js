@@ -26,7 +26,11 @@ export default Controller.extend({
       });
 
       newTimelineItem.save().
-        then(() => false).
+        then(item => {
+          // Reset content in the compose box
+          document.querySelector('.textbox').value = null
+          return this.transitionToRoute('posts.post', item.id);
+        }).
         catch(error => {
         // TODO: Put in the notification bar that their post
         // failed to be persisted. Perhaps due to bad internet connection.

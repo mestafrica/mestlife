@@ -10,7 +10,7 @@
       <input type="submit" value="Post" />
     </form>
   </li>
-  {{#each model as |post|}}
+  {{#each posts as |post|}}
   <li class="post-component">
     <span>{{post.itemText}}</span><br>
     {{#link-to 'posts.post' post.id}}
