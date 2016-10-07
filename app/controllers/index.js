@@ -1,8 +1,15 @@
 import Ember from 'ember';
 
-const { Controller, get } = Ember;
+const {
+  Controller,
+  get,
+  computed: { sort }
+} = Ember;
 
 export default Controller.extend({
+  sortCriteria: ['created-at:desc'],
+  posts: sort('model', 'sortCriteria'),
+
   likeText: 'Like',
   likeAction: 'likeTimelineItem',
   timelineItemText: null,
