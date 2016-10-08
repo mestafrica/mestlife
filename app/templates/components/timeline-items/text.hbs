@@ -4,4 +4,4 @@
 {{/link-to}}&nbsp;/&nbsp;
 <span>{{post.likes.length}} likes</span>&nbsp;/&nbsp;
 <span onclick={{action likeAction post.id}}>{{likeText}}</span>
-{{timeline-items/cesspool comments=post.comments}}
+{{timeline-items/cesspool post=post}}

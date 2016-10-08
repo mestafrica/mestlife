@@ -2,21 +2,4 @@
   <nav>{{link-to 'Home feed' 'index'}}</nav>
 </header>
 <text style="font-size:5em;">{{model.itemText}}</text>
-<div>
-  <ul class="summary-comments {{if (eq model.comments.length 0) "hide"}}">
-    {{#each model.comments as |comment|}}
-      <li class="comment-component">
-        {{comment.content}}
-      </li>
-    {{/each}}
-  </ul>
-</div>
-<form onsubmit={{action "createCommentOnTimelineItem"}} autofocus>
-  <input
-    type="text"
-    class="comment-textbox"
-    placeholder="What do you think?"
-    onchange={{action (mut commentContent) value="target.value"}}
-    required>
-  <input type="submit" value="Comment" />
-</form>
+{{timeline-items/cesspool-under-post post=model}}

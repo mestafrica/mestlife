@@ -1,0 +1,18 @@
+<ul class="summary-comments {{if (eq sortedComments.length 0) "hide"}}">
+  {{#each sortedComments as |comment|}}
+    <li class="comment-component">
+      {{comment.content}}
+    </li>
+  {{/each}}
+</ul>
+<form onsubmit={{action "addCommentOnPost" post}} autofocus>
+  <input
+    type="text"
+    class="comment-textbox"
+    placeholder="What do you think?"
+    onchange={{action (mut commentContent) value="target.value"}}
+    required
+    autofocus=true>
+  <input type="submit" value="Comment" />
+</form>
+
