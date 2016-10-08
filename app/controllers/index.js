@@ -29,7 +29,7 @@ export default Controller.extend({
         then(item => {
           // Reset content in the compose box
           document.querySelector('.textbox').value = null
-          return this.transitionToRoute('posts.post', item.id);
+          this.transitionToRoute('posts.post', get(item, 'id'));
         }).
         catch(error => {
         // TODO: Put in the notification bar that their post
@@ -37,6 +37,8 @@ export default Controller.extend({
         // get(this, 'store').unloadRecord(newTimelineItem);
         console.error(error);
       });
+
+      return false;
     },
 
     likeTimelineItem(post) {

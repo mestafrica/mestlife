@@ -1,7 +1,7 @@
 import DS from 'ember-data';
-import ENV from 'mestlife/config/environment';
+import config from 'mestlife/config/environment';
 
 export default DS.JSONAPIAdapter.extend({
-  host: ENV.API_URL,
-  namespace: ENV.API_VERSION,
+  host: config.API_URL,
+  namespace: config.API_VERSION,
 });

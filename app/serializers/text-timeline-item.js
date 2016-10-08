@@ -8,7 +8,7 @@ export default DS.JSONAPISerializer.extend({
    * we keep the original type in `kind`.
    */
   normalize(modelClass, resourceHash) {
-    resourceHash.attributes.kind = resourceHash.type;
+    resourceHash.attributes.kind = resourceHash.type.split('-')[0];
     resourceHash.type = 'timeline-item';
 
     return this._super(modelClass, resourceHash);
