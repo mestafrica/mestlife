@@ -10,10 +10,8 @@ export default Controller.extend({
   sortCriteria: ['created-at:desc'],
   posts: sort('model', 'sortCriteria'),
 
-  likeText: 'Like',
-  likeAction: 'likeTimelineItem',
   timelineItemText: null,
-  timelineItemKind: 'text-timeline-item',
+  timelineItemKind: 'text-timeline-items',
 
   actions: {
     addTimelineItem() {
@@ -40,32 +38,5 @@ export default Controller.extend({
 
       return false;
     },
-
-    likeTimelineItem(post) {
-      let like = get(this, 'store').createRecord('like', {
-        reactionableType: 'timeline-items',
-        reactionableId: post.id
-      });
-
-      get(post, 'likes').pushObject(like);
-      like.save().
-        then(() => {
-          return this.setProperties({
-            likeText: 'Unlike',
-            likeAction: 'unlikeTimelineItem',
-          });
-        }).
-        catch((error) => {
-          console.error(error);
-          return get(this, 'store').unloadRecord(like);
-        });
-    },
-
-    unlikeTimelineItem(postId) {
-      return this.setProperties({
-        likeText: 'Like',
-        likeAction: 'likeTimelineItem',
-      });
-    }
   }
 });

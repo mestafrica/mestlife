@@ -1,0 +1,11 @@
+<ul class="all-comments {{if (gte comments.length threshold) "hide"}}">
+  {{#each sortedComments as |comment|}}
+    <li>{{comment.content}}</li>
+  {{/each}}
+</ul>
+<ul class="summary-comments {{if (lt comments.length threshold) "hide"}}">
+  <li>{{firstComment.content}}</li>
+  <li class="remaining-comments"><em>... remaining comments ...</em></li>
+  <li>{{lastButOneComment.content}}</li>
+  <li>{{lastComment.content}}</li>
+</ul>

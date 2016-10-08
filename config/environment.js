@@ -20,6 +20,7 @@ module.exports = function(environment) {
 
     API_URL: process.env.API_URL,
     API_VERSION: 'v1',
+    COMMENT_THRESHOLD: 5,
   };
 
   if (environment === 'development') {

@@ -10,19 +10,13 @@
       <input type="submit" value="Post" />
     </form>
   </li>
+
   {{#each posts as |post|}}
-  <li class="post-component">
-    <span>{{post.itemText}}</span><br>
-    {{#link-to 'posts.post' post.id}}
-      <span>{{post.comments.length}} comments</span>
-    {{/link-to}}&nbsp;/&nbsp;
-    <span>{{post.likes.length}} likes</span>&nbsp;/&nbsp;
-    <span onclick={{action likeAction post}}>{{likeText}}</span>
-    <ul class="summary-comments {{if (eq post.comments.length 0) "hide"}}">
-      {{#each post.comments as |comment|}}
-        <li>{{comment.content}}</li>
-      {{/each}}
-    </ul>
-  </li>
+    <li>
+      {{component
+          (concat 'timeline-items/' (singularize post.kind))
+          post=post
+      }}
+    </li>
   {{/each}}
 </ul>

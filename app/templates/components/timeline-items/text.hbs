@@ -1,0 +1,7 @@
+<span>{{post.itemText}}</span><br>
+{{#link-to 'posts.post' post.id}}
+  <span>{{post.comments.length}} comments</span>
+{{/link-to}}&nbsp;/&nbsp;
+<span>{{post.likes.length}} likes</span>&nbsp;/&nbsp;
+<span onclick={{action likeAction post.id}}>{{likeText}}</span>
+{{timeline-items/cesspool comments=post.comments}}
