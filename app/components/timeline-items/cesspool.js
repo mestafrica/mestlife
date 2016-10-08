@@ -8,15 +8,14 @@ const {
 } = Ember;
 
 export default Component.extend({
-  comments: null,
+  post: null,
+  comments: computed('post', function() {
+    return get(get(this, 'post'), 'comments');
+  }),
   sortCriteria: ['createdAt:asc'],
   sortedComments: computed.sort('comments', 'sortCriteria'),
 
   threshold: config.COMMENT_THRESHOLD,
-
-  hidden: computed('comments.length', function() {
-    return get(this, 'comments.length') - 3;
-  }),
 
   firstComment: computed('sortedComments.firstObject', function() {
     const sortedComments = get(this, 'sortedComments');
