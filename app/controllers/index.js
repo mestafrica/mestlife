@@ -11,7 +11,7 @@ export default Controller.extend({
   posts: sort('model', 'sortCriteria'),
 
   timelineItemText: null,
-  timelineItemKind: 'text-timeline-items',
+  timelineItemKind: 'text-timeline-item',
 
   actions: {
     addTimelineItem() {
