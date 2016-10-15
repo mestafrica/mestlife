@@ -1,5 +1,39 @@
-<span>{{post.itemText}}</span><br>
-{{#link-to 'posts.post' post.id}}
+<div>
+  <div class="item-text {{hideWhenEditingPostItemText}}">
+    {{post.itemText}}
+    <em class="{{if (not post.edited) "hide"}}">Edited</em>
+  </div>
+  <form
+    class="{{showWhenEditingPostItemText}}"
+    onsubmit={{action "updatePostItemText" post.kind post.id}}>
+    <input
+      type="text"
+      class="new-post-item-text"
+      value={{readonly post.itemText}}
+      onchange={{action (mut newText) value="target.value"}}
+      required />
+    <br>
+    <input
+      type="button"
+      value="Cancel"
+      onclick={{action "cancelEditPostItemEdit"}} />
+    &nbsp;
+    <input
+      type="submit"
+      value="Save"
+      onclick={{action "updatePostItemText" post.kind post.id}} />
+  </form>
+  <div class="post-actions {{hideWhenEditingPostItemText}}">
+    <a class="edit-post" onclick={{action 'editPostItemText'}}>
+      Edit
+    </a>&nbsp;/&nbsp;
+    <a class="delete-post" onclick={{action 'deletePost' post.id}}>
+      Delete
+    </a>
+  </div>
+</div>
+<br>
+{{#link-to 'posts.post' post}}
   <span>{{post.comments.length}} comments</span>
 {{/link-to}}&nbsp;/&nbsp;
 <span>{{post.likes.length}} likes</span>&nbsp;/&nbsp;
