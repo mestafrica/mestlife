@@ -15,10 +15,10 @@ export default Component.extend({
   newText: null,
 
   hideWhenEditingPostItemText: computed('isEditingPostItemText', function() {
-    return get(this, 'isEditingPostItemText') ? 'hide' : 'visible';
+    return get(this, 'isEditingPostItemText') ? 'hide' : 'show';
   }),
   showWhenEditingPostItemText: computed('isEditingPostItemText', function() {
-    return get(this, 'isEditingPostItemText') ? 'visible' : 'hide';
+    return get(this, 'isEditingPostItemText') ? 'show' : 'hide';
   }),
 
   actions: {
@@ -47,13 +47,10 @@ export default Component.extend({
 
     deletePost(id) {
       if (confirm('Do you want to delete the post?')) {
-        // const store = get(this, 'store');
-        // store.findRecord('timeline-item', id).
-        //   then(post => {
-        //     console.log('Post', post);
-        //     return store.unloadRecord(post) && store.deleteRecord(post);
-        //   }).
-        //   catch(e => console.error(e));
+        const store = get(this, 'store');
+        store.findRecord('timeline-item', id, { backgroundReload: false }).
+          then(post => post.destroyRecord()).
+          catch(e => console.error(e));
       }
     },
 
