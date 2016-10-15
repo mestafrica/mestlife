@@ -18,7 +18,7 @@ module.exports = function(environment) {
       // when it is created
     },
 
-    API_URL: process.env.API_URL,
+    API_URL: process.env.API_URL || 'http://localhost:3000',
     API_VERSION: 'v1',
     COMMENT_THRESHOLD: 5,
   };
