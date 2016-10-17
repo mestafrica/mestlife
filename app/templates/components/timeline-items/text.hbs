@@ -1,7 +1,7 @@
 <div>
   <div class="item-text {{hideWhenEditingPostItemText}}">
-    {{post.itemText}}
-    <em class="{{if (not post.edited) "hide"}}">Edited</em>
+    {{post.itemText}} <small>{{moment-from-now post.createdAt}}</small>
+    <em class="edited {{if (not post.edited) "hide"}}">Edited</em>
   </div>
   <form
     class="{{showWhenEditingPostItemText}}"
