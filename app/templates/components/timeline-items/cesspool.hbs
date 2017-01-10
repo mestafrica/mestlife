@@ -1,11 +1,11 @@
 <ul class="all-comments {{if (gte sortedComments.length threshold) "hide"}}">
   {{#each sortedComments as |comment|}}
-    <li>{{comment.content}}</li>
+    <li><span>Jerry Yang</span> {{comment.content}}</li>
   {{/each}}
 </ul>
 <ul class="summary-comments {{if (lt sortedComments.length threshold) "hide"}}">
-  {{#link-to 'posts.post' post.id}}
-    <li>{{firstComment.content}}</li>
+  {{#link-to "posts.post" post.id}}
+    <li><span>Andrew Berkowitz</span> {{firstComment.content}}</li>
     <li class="remaining-comments"><em>... remaining comments ...</em></li>
     <li>{{lastButOneComment.content}}</li>
     <li>{{lastComment.content}}</li>

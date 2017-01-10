@@ -8,6 +8,7 @@ const {
 } = Ember;
 
 export default Component.extend({
+  classNames: ['row', 'marg1', 'black'],
   post: null,
   comments: computed('post', function() {
     return get(get(this, 'post'), 'comments');

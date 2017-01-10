@@ -1,41 +1,59 @@
-<div>
-  <div class="item-text {{hideWhenEditingPostItemText}}">
-    {{post.itemText}} <small>{{moment-from-now post.createdAt}}</small>
-    <em class="edited {{if (not post.edited) "hide"}}">Edited</em>
+<header class="card-head ui equal width grid">
+  <div class="row">
+    <div class="column">
+      <i class="icon pin"></i> PINNED
+    </div>
+    <div class="float-rt">
+      <i class="remove icon side-icon"></i>
+    </div>
   </div>
-  <form
-    class="{{showWhenEditingPostItemText}}"
-    onsubmit={{action "updatePostItemText" post.kind post.id}}>
-    <input
-      type="text"
-      class="new-post-item-text"
-      value={{readonly post.itemText}}
-      onchange={{action (mut newText) value="target.value"}}
-      required />
-    <br>
-    <input
-      type="button"
-      value="Cancel"
-      onclick={{action "cancelEditPostItemEdit"}} />
-    &nbsp;
-    <input
-      type="submit"
-      value="Save"
-      onclick={{action "updatePostItemText" post.kind post.id}} />
-  </form>
-  <div class="post-actions {{hideWhenEditingPostItemText}}">
-    <a class="edit-post" onclick={{action 'editPostItemText'}}>
-      Edit
-    </a>&nbsp;/&nbsp;
-    <a class="delete-post" onclick={{action 'deletePost' post.id}}>
-      Delete
+</header>
+<main class="card-body ui grid">
+  <section class="row">
+    <p class="three wide column">
+      <img class="thumb-img" src="" alt="author's photo" />
+    </p>
+    <p class="thirteen wide column">
+      <div class="name">Yaw Boakye</div>
+      <time class="time-location">
+        {{moment-from-now post.createdAt}}
+        <em class="edited {{if (not post.edited) "hide"}}">Edited</em>
+      </time>
+    </p>
+    <nav class="float-rt">
+      <i class="ellipsis vertical icon side-icon"></i>
+    </nav>
+  </section>
+  <section class="post-body row">
+    <p class="post-text row">{{post.itemText}}</p>
+    <p class="post-extra"></p>
+  </section>
+</main>
+<footer class="card-end">
+  <hr class="marg1" />
+  <div class="ui grid black">
+    {{#link-to
+        "posts.post"
+        post.id
+        (query-params s="likes")
+        class="three wide column"}}
+      <span>{{post.likes.length}}</span> Likes
+    {{/link-to}}
+    {{#link-to
+        "posts.post"
+        post.id
+        (query-params s="comments")
+        class="five wide column"}}
+      <span>{{post.comments.length}}</span> Comments
+    {{/link-to}}
+  </div>
+  <hr class="marg1" />
+  <div class="ui equal width grid">
+    <a class="column" onclick={{action likeAction post.id}}>
+      <i class="icon like"></i> {{likeText}}
     </a>
+    <a class="column"><i class="icon comment"></i> Comment</a>
+    <a class="column"><i class="icon share"></i> Share</a>
   </div>
-</div>
-<br>
-{{#link-to 'posts.post' post}}
-  <span>{{post.comments.length}} comments</span>
-{{/link-to}}&nbsp;/&nbsp;
-<span>{{post.likes.length}} likes</span>&nbsp;/&nbsp;
-<span onclick={{action likeAction post.id}}>{{likeText}}</span>
-{{timeline-items/cesspool post=post}}
+  {{timeline-items/cesspool post=post}}
+</footer>

@@ -8,6 +8,8 @@ const {
 } = Ember;
 
 export default Component.extend({
+  tagName: 'article',
+  classNames: ['mest-card'],
   store: service(),
   likeAction: 'likeTimelineItem',
   likeText: 'Like',

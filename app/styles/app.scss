@@ -1,10 +1,28 @@
-.hide { display: none; }
-a { text-decoration: none; }
+@import 'https://fonts.googleapis.com/css?family=Roboto';
+@import 'variables';
+@import 'home_feed';
 
-ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+html {
+  height: 100%;
+  overflow-x: hidden;
+  font-family: 'Roboto', sans-serif;
 }
 
-@import 'timeline_items_text';
+body {
+  min-height: 100%;
+	background: $theme-bg;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+
+  li {
+    width: inherit;
+  }
+}
+
+.hide { display: none; }
+

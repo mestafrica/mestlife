@@ -1,0 +1,163 @@
+.home-feed{
+	min-height: 100%;
+	.nav{
+		background: $theme-color;
+		color: $white;
+		box-shadow: 0px 0px 10px 0px rgba(0,0,0,.5);
+
+    a {
+      color: $white;
+      text-decoration: none;
+
+      .is-active {
+        box-shadow: 0px -4px 0px $white inset;
+        color: $white;
+      }
+    }
+
+		.mitem{
+			padding: 10px 0;
+			text-align: center;
+		}
+		.is-active{
+	    box-shadow: 0px -4px 0px $white inset;
+	    color: $white;
+		}
+	}
+	
+	.feed-container{
+		margin: 30px 0;
+	}
+
+	.text-center{
+		text-align: center;
+	}
+
+	.padlr30{ padding: 0 30px;	}
+	.maxcont{
+		max-width: 600px;
+		margin: 0 auto;
+
+		.grid{
+			margin: 0;
+		}
+	}
+
+	.padtb20{
+		margin: 20px 0;
+	}
+
+	.fs1-5{ font-size: 1.5em; }
+
+	.status-card, .mest-card{
+		background: $white;
+		color: #333;
+		min-height: 50px;
+		//margin: 10px;
+		font-size: 1.2em;
+
+		input{
+			background: none;
+			border: none;
+		}
+
+	}
+
+	.mest-card{
+		margin: 10px 0 !important;
+		.side-icon{
+			color: #ccc;
+			font-size: 1.5em;
+		}
+		.card-head{
+			color: $theme-color;
+			border-bottom: solid 1px $theme-bg;
+			font-size: 0.7em;
+			//row{padding: 0.5rem 0 !important}			
+		}
+
+		.card-body{
+			//margin: 10px 0;
+			font-weight: 600;
+			color: 333;
+			.location-grid{
+				color: #fff;
+				text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.4);
+				.side-icon{
+					color: inherit !important;
+				}
+			}
+			.name{
+				font-size: 1.2em;
+			}
+			.time-location{
+				color: #aaa;
+				font-weight: 300;
+				font-size: 0.7em;
+			}
+			.post-body{
+				padding: 1rem;
+				.post-extra{
+					margin: 5px 0;
+					width: 100%;
+					.img, img{
+						width: 100%;
+						max-height: 400px;
+					}
+					.text{
+						padding: 0.5rem 1rem;
+						font-weight: 800;
+						font-size: 1.5em;
+						.extra-link{
+							margin: 0.5rem 0 0 0;
+							color: #aaa;
+							font-weight: 300;
+							font-size: 0.5em;
+						}
+					}
+				}
+			}
+
+
+			.material-card{
+				box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.20);
+    		border-radius: 0 0 2px 2px;
+			}
+		}
+
+		.card-end{
+			color: #a5a5a5;
+			font-size: 0.8em;
+			padding: 0 0 1rem 0;
+
+			hr{
+				border: solid 1px #f5f5f5;
+				margin: -0.3rem 1rem;
+			}
+			.black{color: #333; font-weight: 300}
+			span{
+				color: #333;
+				font-weight: 800;
+			}
+			i{
+				color: #9a9a9a;
+			}
+		}
+
+		.post-body{
+			padding: 0 1rem;
+			.post-text{ margin: 1rem 0; }
+		}
+
+		span{font-weight: 800}
+	}
+
+	.pad20{padding: 20px;}
+	.marg1{margin: 0.8rem 1rem;}
+	.thumb-img{width: 50px;}
+	.float-rt{
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+	}
+}
