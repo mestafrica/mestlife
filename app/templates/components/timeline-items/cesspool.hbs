@@ -1,13 +1,13 @@
-<ul class="all-comments {{if (gte sortedComments.length threshold) "hide"}}">
+<ul class="row {{if (gte sortedComments.length threshold) "hide"}}">
   {{#each sortedComments as |comment|}}
-    <li><span>Jerry Yang</span> {{comment.content}}</li>
+  <li class="row"><span>Jerry Yang</span> {{comment.content}}</li>
   {{/each}}
 </ul>
-<ul class="summary-comments {{if (lt sortedComments.length threshold) "hide"}}">
+<ul class="row {{if (lt sortedComments.length threshold) "hide"}}">
+  <li class="row"><span>Andrew Berkowitz</span> {{firstComment.content}}</li>
   {{#link-to "posts.post" post.id}}
-    <li><span>Andrew Berkowitz</span> {{firstComment.content}}</li>
-    <li class="remaining-comments"><em>... remaining comments ...</em></li>
-    <li>{{lastButOneComment.content}}</li>
-    <li>{{lastComment.content}}</li>
+    <li class="row"><i class="ellipsis horizontal icon"></i></li>
   {{/link-to}}
+  <li class="row"><span>Andrew Berkowitz</span> {{lastButOneComment.content}}</li>
+  <li class="row"><span>Andrew Berkowitz</span> {{lastComment.content}}</li>
 </ul>

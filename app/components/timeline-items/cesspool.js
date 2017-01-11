@@ -8,6 +8,7 @@ const {
 } = Ember;
 
 export default Component.extend({
+  tagName: 'section',
   classNames: ['row', 'marg1', 'black'],
   post: null,
   comments: computed('post', function() {

@@ -1,7 +1,7 @@
 <header class="card-head ui equal width grid">
   <div class="row">
     <div class="column">
-      <i class="icon pin"></i> PINNED
+      <i class="pin icon"></i> PINNED
     </div>
     <div class="float-rt">
       <i class="remove icon side-icon"></i>
@@ -31,29 +31,33 @@
 </main>
 <footer class="card-end">
   <hr class="marg1" />
-  <div class="ui grid black">
+  <section class="ui grid black">
     {{#link-to
         "posts.post"
         post.id
         (query-params s="likes")
         class="three wide column"}}
-      <span>{{post.likes.length}}</span> Likes
+        <span>{{post.likes.length}}</span>&nbsp;Likes
     {{/link-to}}
     {{#link-to
         "posts.post"
         post.id
         (query-params s="comments")
         class="five wide column"}}
-      <span>{{post.comments.length}}</span> Comments
+      <span>{{post.comments.length}}</span>&nbsp;Comments
     {{/link-to}}
-  </div>
+  </section>
   <hr class="marg1" />
-  <div class="ui equal width grid">
+  <section class="ui equal width grid">
     <a class="column" onclick={{action likeAction post.id}}>
-      <i class="icon like"></i> {{likeText}}
+      <i class="empty heart icon"></i>&nbsp;{{likeText}}
     </a>
-    <a class="column"><i class="icon comment"></i> Comment</a>
-    <a class="column"><i class="icon share"></i> Share</a>
-  </div>
+    <a class="column">
+      <i class="outline comment icon"></i>&nbsp;Comment
+    </a>
+    <a class="column">
+      <i class="external share icon"></i>&nbsp;Share
+    </a>
+  </section>
   {{timeline-items/cesspool post=post}}
 </footer>
