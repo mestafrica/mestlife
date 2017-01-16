@@ -1,6 +1,6 @@
 <header class="card-head ui equal width grid">
-  <div class="row">
-    <div class="column">
+  <div class="row hide">
+    <div class="column {{if post.pinned "" "hide"}}">
       <i class="pin icon"></i> PINNED
     </div>
     <div class="float-rt">
@@ -17,7 +17,9 @@
       <div class="name">Yaw Boakye</div>
       <time class="time-location">
         {{moment-from-now post.createdAt}}
-        <em class="edited {{if (not post.edited) "hide"}}">Edited</em>
+        <mark class="edited {{unless post.edited "hide"}}">
+          Edited
+        </mark>
       </time>
     </p>
     <nav class="float-rt">
@@ -49,12 +51,16 @@
   </section>
   <hr class="marg1" />
   <section class="ui equal width grid">
-    <a class="column" onclick={{action likeAction post.id}}>
+    {{#link-to "index" class="column" click=(action likeAction post.id)}}
       <i class="empty heart icon"></i>&nbsp;{{likeText}}
-    </a>
-    <a class="column">
+    {{/link-to}}
+    {{#link-to
+      "posts.post"
+      post.id
+      (query-params s="comments")
+      class="column" }}
       <i class="outline comment icon"></i>&nbsp;Comment
-    </a>
+    {{/link-to}}
     <a class="column">
       <i class="external share icon"></i>&nbsp;Share
     </a>

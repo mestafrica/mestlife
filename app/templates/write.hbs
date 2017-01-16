@@ -1,0 +1,5 @@
+{{#compose-box as |cb|}}
+    {{cb.head close=(action "cancelPost")}}
+    {{cb.textarea textEntered=(action "textEntered")}}
+    {{cb.tray makePost=(action "makePost")}}
+{{/compose-box}}

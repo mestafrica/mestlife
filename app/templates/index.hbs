@@ -1,7 +1,7 @@
-<div id="home-feed" class="home-feed">
-  <nav id="nav" class="nav padlr30">
+<div class="home-feed">
+  <nav class="nav padlr30">
     <div class="maxcont container">
-      <div class="text-center fs1-5">Home</div>
+      <header class="text-center fs1-5">Home</header>
       <div class="ui equal width grid">
         <a class="column mitem is-active" href="/">All</a>
         <a class="column mitem" href="/">Following</a>
@@ -12,14 +12,15 @@
   <div class="feed-container">
     <ul class="maxcont container">
       <li class="status-card ui grid">
-        <div class="row">
+        <div class="compose-box row">
           <div class="three wide column">
             <img class="thumb-img" src="" alt="signed in user" />
           </div>
-          <a href="/" class="thirteen wide column">What's the latest</a>
+          {{#link-to 'write' class="write thirteen wide column"}}
+          What's the latest?
+          {{/link-to}}
         </div>
       </li>
-
       {{#each posts as |post|}}
       <li>
         {{component

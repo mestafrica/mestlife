@@ -1,6 +1,7 @@
-@import 'https://fonts.googleapis.com/css?family=Roboto';
 @import 'variables';
 @import 'home_feed';
+@import 'write';
+@import 'components/compose-box';
 
 html {
   height: 100%;
@@ -10,7 +11,7 @@ html {
 body {
   min-height: 100%;
 	background: $theme-bg;
-  font-family: 'Roboto', sans-serif;
+  font: 'Roboto', sans-serif !important;
 
   ul {
     list-style: none;
@@ -23,8 +24,10 @@ body {
     }
   }
 
-  a { color: inherit; }
+  a {
+    font-family: 'Roboto', sans-serif !important;
+    color: inherit;
+  }
 
   .hide { display: none; }
 }
-

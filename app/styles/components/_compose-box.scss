@@ -1,0 +1,18 @@
+.compose {
+  background: #FFFFFF;
+  width: 100%;
+  height: 100%;
+
+  .writebox {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    padding: 1%;
+    font-size: $large;
+    line-height: 1.2em;
+    resize: none;
+  }
+}
+
+
+

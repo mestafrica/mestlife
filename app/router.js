@@ -11,6 +11,7 @@ Router.map(function() {
     this.route('index', { path: '/' });
     this.route('post', { path: '/:postId' });
   });
+  this.route('write');
 });
 
 export default Router;
