@@ -23,13 +23,20 @@ export default Controller.extend({
       item.save().
         then(i => {
           writeBox.value == null;
-          return this.transitionToRoute('index');
+          return this.transitionToRoute('posts.post', get(i, 'id'));
         }).
-        catch(e => console.error(e));
+        catch(e => {
+          console.error(e)
+          return get(this, 'store').unloadRecord(item);
+        });
     },
 
     textEntered(event) {
       console.log("hello");
+    },
+
+    pickFile(event) {
+      console.log("waiting...");
     }
   }
 });
