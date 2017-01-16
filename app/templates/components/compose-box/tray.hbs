@@ -1,5 +1,11 @@
-<input class="photo-picker" type="file" style="display:none"/>
-<span onclick={{pickFile}}><i class="photo icon"></i></span>
+<input
+  accept="image/*"
+  class="photo-picker"
+  type="file"
+  style="display:none"
+  onchange={{handleUpload}}
+  multiple/>
+<span onclick={{openFilePicker}}><i class="photo icon"></i></span>
 <button onclick={{makePost}}>Post</button>
 <script type="javascript">
 </script>

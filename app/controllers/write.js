@@ -2,12 +2,15 @@ import Ember from 'ember';
 const { Controller, get } = Ember;
 
 export default Controller.extend({
-  hasContent: false,
   kind: 'text-timeline-item',
 
   actions: {
     cancelPost() {
       let text = document.querySelector('.writebox').value.trim();
+      if (text.length && confirm('Save to drafts?')) {
+        // TODO: Save to drafts i.e. your localStorage
+        console.log('Saved to drafts');
+      }
       return this.transitionToRoute('index');
     },
 
@@ -35,8 +38,11 @@ export default Controller.extend({
       console.log("hello");
     },
 
-    pickFile(event) {
-      console.log("waiting...");
+    openFilePicker(event) {
+      document.querySelector('.photo-picker').click();
+    },
+
+    handleUpload() {
     }
   }
 });
