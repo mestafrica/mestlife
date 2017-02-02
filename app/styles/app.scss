@@ -2,6 +2,13 @@
 @import 'home_feed';
 @import 'write';
 @import 'components/compose-box';
+@import 'components/photos_preview_and_text';
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
 
 html {
   height: 100%;

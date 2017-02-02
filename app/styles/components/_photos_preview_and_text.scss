@@ -1,0 +1,16 @@
+ul.preview {
+  margin: 5px;
+  list-style: none;
+  display: flex;
+  flex-flow: flex-start;
+  flex-wrap: nowrap;
+  align-items: center;
+
+  li.thumbnail {
+    width: 100px;
+    height: 100px;
+    padding: 5px;
+    margin: 5px 3px;
+    background-size: 100px;
+  }
+}

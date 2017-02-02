@@ -1,7 +1,14 @@
 {{#compose-box as |cb|}}
     {{cb.head cancelPost=(action "cancelPost")}}
-    {{cb.textarea textEntered=(action "textEntered")}}
+    {{cb.textarea
+        rows=rows
+        kind=kind
+        text=text
+        photos=photos
+        textEntered=(action "textEntered")
+        removePhoto=(action "removePhoto")}}
     {{cb.tray
+        updatePhotosPreview=(action "updatePhotosPreview")
         makePost=(action "makePost")
         openFilePicker=(action "openFilePicker")}}
 {{/compose-box}}

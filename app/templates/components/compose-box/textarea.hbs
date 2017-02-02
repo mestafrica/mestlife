@@ -1,10 +1,18 @@
 <textarea
   class="writebox"
-  rows="10"
+  rows={{rows}}
   minlength="1"
   maxlength="1000"
   autocapitalize="sentences"
   spellcheck=true
-  required="true"
-  autofocus="true"></textarea>
-<section class="hide">Image Preview</section>
+  autofocus="true"
+  onchange={{action (mut text) value="target.value"}}>{{text}}</textarea>
+<ul class="preview {{unless (eq kind "photo-timeline-item") "hide"}}">
+  {{#each photos as |photo i|}}
+    <li
+      class="thumbnail"
+      style="background-image:url({{photo.url}})">
+      <i class="remove icon" data-value={{i}} onclick={{removePhoto}}></i>
+    </li>
+  {{/each}}
+</ul>

@@ -1,0 +1,15 @@
+<div class="row">
+  <textarea
+    class="photos-text"
+    type="text"
+    onchange={{action (mut caption) value="target.value"}}>{{caption}}</textarea>
+</div>
+<ul class="preview">
+  {{#each photos as |photo i|}}
+    <li
+      class="thumbnail"
+      style="background-image:url({{photo.data}})">
+      <i class="remove icon" data-value={{i}} onclick={{removePhoto}}></i>
+    </li>
+  {{/each}}
+</ul>
