@@ -1,38 +1,54 @@
 import Ember from 'ember';
 import RSVP from 'rsvp';
+import bucket from 'mestlife/ext/s3';
+import ENV from 'mestlife/config/environment';
 
 const {
   Service,
   get,
-  set
+  set,
+  setProperties,
+  inject: {service},
+  run: {bind}
 } = Ember;
 
 export default Service.extend({
   photos: null,
+  photoFiles: null,
+  audio: null,
+  location: null,
+  store: service(),
   reader: new FileReader(),
 
+
   init() {
-    set(this, 'photos', []);
+    setProperties(this, {
+      photos: [],
+      photoFiles: []
+    });
     return this._super(...arguments);
   },
 
   updatePreview(files) {
     const photos = get(this, 'photos');
-    const promises = [];
+    const photoFiles = get(this, 'photoFiles');
+    const __prmsz = [];
 
     let i, file, oUrl;
     for (i = 0; i < files.length; i++) {
       file = files[i];
       if (!/^image\//i.test(file.type)) continue;
-      promises.push(readFile(file));
+      readFile(file).
+        then(bind(this, addPreview(file)));
     }
 
-    RSVP.allSettled(promises).then(function(all) {
-      all.forEach(function(r) {
-        if (alreadyShowingInPreview(r.value)) return;
-        photos.pushObject(r.value);
-      });
-    });
+    function addPreview(rawFile) {
+      return function(f) {
+        if (alreadyShowingInPreview(f)) return;
+        photos.pushObject(f);
+        photoFiles.push(rawFile);
+      }
+    }
 
     function readFile(file) {
       const reader = new FileReader();
@@ -67,7 +83,7 @@ export default Service.extend({
       if (!apropos.length) return false;
 
       let l = t.data.length;
-      let p = Array(4);
+      let p = []; p.length = 4;
       let y = Math.floor(l/4);
       let o, i, idx;
 
@@ -85,7 +101,6 @@ export default Service.extend({
           return true;
       }
       return false;
-
     }
 
     function randomSample(w, v) {
@@ -93,5 +108,41 @@ export default Service.extend({
         map(function(i) { return w.substr(i[0], i[1]) }).
         join('');
     }
-  }
+  },
+
+  makePhotoPost(post) {
+    const store = get(this, 'store');
+    const photos = get(this, 'photos');
+    const photoFiles = get(this, 'photoFiles');
+    let __prmsz = [],
+        p,
+        filename,
+        file,
+        photo;
+
+    for (let i = 0; i < photos.length; i++) {
+      photo = photos[i];
+      file = photoFiles[i];
+      filename = `${ENV.IMG_DIR}/${UUIDjs.create()}.${photo.name.split('.').pop()}`.toLowerCase();
+      bucket.upload({
+          Key: filename,
+          Body: file,
+          ContentType: file.type
+        },
+        function() {});
+
+      p = store.createRecord('photo', {
+        url: filename,
+        size: photo.size,
+        originalFileName: photo.name,
+        photoTimelineItem: post,
+      });
+
+      __prmsz.push(p.save());
+    }
+
+    RSVP.all(__prmsz).catch(e => store.deleteRecord(post));
+  },
+
+  makeTextPost() { return; }
 });

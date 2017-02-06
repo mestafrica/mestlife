@@ -11,9 +11,8 @@ const {
 export default Mixin.create({
   comments: hasMany('comment'),
   likes: hasMany('like'),
-
-  createdAt: attr('date', { defaultValue() { return new Date(); } }),
-  updatedAt: attr('date', { defaultValue() { return new Date(); } }),
+  createdAt: attr('date'),
+  updatedAt: attr('date'),
 
   // Computed
   edited: computed('updatedAt', function() {

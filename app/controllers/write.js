@@ -1,4 +1,6 @@
 import Ember from 'ember';
+import RSVP from 'rsvp';
+
 const {
   Controller,
   computed,
@@ -38,33 +40,34 @@ export default Controller.extend({
     makePost() {
       const kind = get(this, 'kind');
       const store = get(this, 'store');
+      const writeBox = document.querySelector('.writebox');
+      const itemText = writeBox.value.trim();
+      const writer = get(this, 'writer');
+      let f,
+          __prmz;
+
+      let __item = store.createRecord(kind, {
+        kind,
+        itemText,
+        numberOfPhotosAttached: writer.photos.length
+      });
+
+      __prmz = __item.save();
 
       switch (kind) {
-        case 'text-timeline-item':     return makeTextPost();
-        case 'photo-timeline-item':    return makePhotoPost();
-        case 'audio-timeline-item':    return makeAudioPost();
-        case 'location-timeline-item': return makeLocationPost();
-        default:                       break;
+        case 'photo-timeline-item':    f = 'makePhotoPost';    break;
+        case 'audio-timeline-item':    f = 'makeAudioPost';    break;
+        case 'location-timeline-item': f = 'makeLocationPost'; break;
+        default:                       f = 'makeTextPost';     break;
       }
 
-      function makeTextPost() {
-        let writeBox = document.querySelector('.writebox');
-        let itemText = writeBox.value.trim();
-        let item = store.createRecord(kind, {
-          kind,
-          itemText,
-        });
-        item.save().
-          then(i => {
-            writeBox.value = null;
-            return this.transitionToRoute('posts.post', get(i, 'id'));
-          }).
-          catch(e => store.unloadRecord(item));
-      }
-
-      function makePhotoPost() { }
-      function makeAudioPost() { }
-      function makeLocationPost() { }
+      __prmz.
+        then(__i => {
+          writeBox.value = null;
+          this.transitionToRoute('posts.post', get(__i, 'id'));
+          return writer[f](__i);
+        }).
+        catch(__e => store.unloadRecord(__item));
     },
 
     textEntered(event) {

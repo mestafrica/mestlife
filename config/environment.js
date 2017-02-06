@@ -12,8 +12,9 @@ module.exports = function(environment) {
         // e.g. 'with-controller': true
       },
       EXTEND_PROTOTYPES: {
-        // Prevent Ember Data from overriding Date.parse.
-        Date: false
+        Date: false,
+        String: false,
+        Function: false,
       }
     },
 
@@ -25,6 +26,12 @@ module.exports = function(environment) {
     API_URL: process.env.API_URL || 'http://localhost:3000',
     API_VERSION: 'v1',
     COMMENT_THRESHOLD: 5,
+
+    OM_AWS_ACCESS_KEY_ID: process.env.OM_AWS_ACCESS_KEY_ID,
+    OM_AWS_SECRET_ACCESS_KEY: process.env.OM_AWS_SECRET_ACCESS_KEY,
+    OM_AWS_REGION: process.env.OM_AWS_REGION,
+    OM_AWS_S3_BUCKET: process.env.OM_AWS_S3_BUCKET,
+    IMG_DIR: 'original',
   };
 
   if (environment === 'development') {
